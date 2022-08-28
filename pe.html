@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+textarea {
+}
+</style>
+</head>
+<body>
+
+<h1>Parsing Explorer</h1>
+
+<button onclick="generate ()">Generate Python from JSON drawing spec</button>
+
+<br>
+<p id="status" > READY </p>
+<br>
+
+<p>src, grammar, fmt:</p>
+<textarea id="src" rows="5" cols="20" placeholder="src" style="background-color:oldlace;">
+</textarea>
+
+<textarea id="grammar" rows="5" cols="20" placeholder="grammar" style="background-color:oldlace;">
+</textarea>
+
+<textarea id="fmt" rows="5" cols="20" placeholder="fmt" style="background-color:oldlace;">
+</textarea>
+
+<p>output:</p>
+<textarea id="output" rows="17" cols="60" placeholder="output" style="background-color:oldlace;">
+</textarea>
+
+<br>
+<br>
+<br>
+
+<!-- Ohm-JS -->
+<script src="https://unpkg.com/ohm-js@16/dist/ohm.min.js"></script>
+
+
+<!-- match rewriter tools fmt -->
+    <script src="fmt-js.js"></script>
+    <script src="transpile.js"></script>
+
+<script>
+
+/// example 1  ...
+  const testsrc1 = String.raw`a`;
+
+  const testgrammar1 = String.raw`
+Test {
+main = "a"
+}
+`;
+
+  const testfmt1 = String.raw`
+Test {
+main [terminal] = ‛«terminal»’
+}
+`;
+/// ... example 1
+
+/// example 2  ...
+  const testsrc2 = String.raw`
+b
+`;
+
+  const testgrammar2 = String.raw`
+Test {
+Main = "b"
+}
+`;
+
+  const testfmt2 = String.raw`
+Test {
+Main [terminal] = ‛«terminal»’
+}
+`;
+/// ... example 2
+
+/// example 3 ...
+  const testsrc3 = String.raw`
+c,cc
+`;
+
+  const testgrammar3 = String.raw`
+Test {
+Main = ("c" ","?)+
+}
+`;
+
+  const testfmt3 = String.raw`
+Test {
+Main [c+ optcomma+] = ‛hello «c»...«optcomma» world’
+}
+`;
+/// ... example 3  
+
+
+  function test (src, grammarName, grammar, fmt) {
+      src = document.getElementById(src).value;
+      grammar = document.getElementById(grammar).value;
+      fmt = document.getElementById(fmt).value;
+      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fmt);
+      if (success) {
+          document.getElementById('output').value = transpiled;
+          document.getElementById('status').innerHTML = "OK";
+      } else {
+          document.getElementById('output').value = transpiled;
+          document.getElementById('status').innerHTML = "FAILED " + errormessage;
+      }
+  }
+
+  function fill (srctextarea, src, grammartextarea, grammar, fmttextarea, fmt) {
+      document.getElementById(srctextarea).innerHTML = src;
+      grammar = document.getElementById(grammartextarea).innerHTML = grammar;
+      fmt = document.getElementById(fmttextarea).innerHTML = fmt;
+  }
+  
+  function generate () {
+      fill ('src', testsrc1, 'grammar', testgrammar1, 'fmt', testfmt1);
+      test ('src', 'Test', 'grammar', 'fmt');
+  }
+  
+  </script>
+</body>
+</html>
+
+
