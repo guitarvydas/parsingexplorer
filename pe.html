@@ -15,15 +15,19 @@ textarea {
 <br>
 <p id="status" > READY </p>
 <br>
+<button onclick="fill1 ()">fill source fields for test1</button>
+<button onclick="fill2 ()">fill source fields for test2</button>
+<button onclick="fill3 ()">fill source fields for test3</button>
+
 
 <p>src, grammar, fmt:</p>
-<textarea id="src" rows="5" cols="20" placeholder="src" style="background-color:oldlace;">
+<textarea id="src" rows="9" cols="40" placeholder="src" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="grammar" rows="5" cols="20" placeholder="grammar" style="background-color:oldlace;">
+<textarea id="grammar" rows="9" cols="40" placeholder="grammar" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="fmt" rows="5" cols="20" placeholder="fmt" style="background-color:oldlace;">
+<textarea id="fmt" rows="9" cols="40" placeholder="fmt" style="background-color:oldlace;">
 </textarea>
 
 <p>output:</p>
@@ -80,18 +84,28 @@ Main [terminal] = ‛«terminal»’
 
 /// example 3 ...
   const testsrc3 = String.raw`
+www 
+xxx
 c,cc
 `;
 
   const testgrammar3 = String.raw`
 Test {
-Main = ("c" ","?)+
+Main = PhraseW PhraseX PhraseY PhraseC
+PhraseW = "w"*
+PhraseX = "x"+
+PhraseY = "y"?
+PhraseC = ("c" ","?)+
 }
 `;
 
   const testfmt3 = String.raw`
 Test {
-Main [c+ optcomma+] = ‛hello «c»...«optcomma» world’
+Main [w x y c] = ‛«w»/«x»/«y»/«c»’
+PhraseW [char*] = ‛«char»’
+PhraseX [char+] = ‛«char»’
+PhraseY [char?] = ‛«char»’
+PhraseC [c+ optcomma+] = ‛hello «c»...«optcomma» world’
 }
 `;
 /// ... example 3  
@@ -117,8 +131,17 @@ Main [c+ optcomma+] = ‛hello «c»...«optcomma» world’
       fmt = document.getElementById(fmttextarea).innerHTML = fmt;
   }
   
-  function generate () {
+  function fill1 () {
       fill ('src', testsrc1, 'grammar', testgrammar1, 'fmt', testfmt1);
+  }
+  function fill2 () {
+      fill ('src', testsrc2, 'grammar', testgrammar2, 'fmt', testfmt2);
+  }
+  function fill3 () {
+      fill ('src', testsrc3, 'grammar', testgrammar3, 'fmt', testfmt3);
+  }
+  
+  function generate () {
       test ('src', 'Test', 'grammar', 'fmt');
   }
   
