@@ -18,20 +18,21 @@ textarea {
 <button onclick="fill1 ()">fill source fields for test1</button>
 <button onclick="fill2 ()">fill source fields for test2</button>
 <button onclick="fill3 ()">fill source fields for test3</button>
+<button onclick="fill4 ()">fill source fields for test4</button>
 
 
 <p>src, grammar, fmt:</p>
-<textarea id="src" rows="9" cols="40" placeholder="src" style="background-color:oldlace;">
+<textarea id="src" rows="5" cols="40" placeholder="src" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="grammar" rows="9" cols="40" placeholder="grammar" style="background-color:oldlace;">
+<textarea id="grammar" rows="5" cols="40" placeholder="grammar" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="fmt" rows="9" cols="60" placeholder="fmt" style="background-color:oldlace;">
+<textarea id="fmt" rows="5" cols="60" placeholder="fmt" style="background-color:oldlace;">
 </textarea>
 
 <p>output:</p>
-<textarea id="output" rows="17" cols="60" placeholder="output">
+<textarea id="output" rows="5" cols="60" placeholder="output">
 </textarea>
 
 <br>
@@ -112,6 +113,53 @@ PhraseC [c+ optcomma+] = ‛hello ⟨c⟩...⟨optcomma⟩ world’
 `;
 /// ... example 3  
 
+/// example 4 ...
+  const testsrc4 = String.raw`
+I Want A Cheeseburger
+I Want A Hamburger With Mustard And Special Sauce
+`;
+
+const testgrammar4 = String.raw`
+Test {
+Main = Phrase+
+
+Phrase =
+  | "I" "Want" "A" "Hamburger" "With" Choice* -- longphrase
+  | "I" "Want" "A" "Cheeseburger"             -- shortphrase
+  
+Choice = "And"? (Condiment | Extra)
+  
+Condiment =
+ | "Mustard"         -- mustard
+ | "Ketchup"         -- ketchup
+ | "Pickles"         -- pickles
+ | "Special" "Sauce" -- specialsauce
+ 
+Extra =
+ | "Cheese"          -- cheese
+ | "Bacon"           -- bacon
+ 
+}
+`;
+
+  const testfmt4 = String.raw`
+Test {
+Main [Phrase+] = ‛coming right up: ⟨Phrase⟩’
+Phrase_longphrase [kI kWant kA kHamburger kWith Choice*]
+  = ‛\n⟨kHamburger⟩ ⟨kWith⟩⟨Choice⟩’
+Phrase_shortphrase [kI kWant kA kCheeseburger]
+  = ‛\n⟨kCheeseburger⟩’
+Choice [kAnd? x] = ‛ and⟨x⟩’  
+Condiment_mustard [kCondiment] = ‛ ⟨kCondiment⟩’
+Condiment_ketchup [kCondiment] = ‛ ⟨kCondiment⟩’
+Condiment_pickles [kCondiment] = ‛ ⟨kCondiment⟩’
+Condiment_specialsauce [kSpecial kSauce] = ‛ SAUCE’
+Extra_cheese [kItem] = ‛⟨kItem⟩’
+Extra_bacon [kItem] = ‛⟨kItem⟩’
+}
+`;
+/// ... example 4
+
 
   function test (src, grammarName, grammar, fmt) {
       src = document.getElementById(src).value;
@@ -141,6 +189,9 @@ PhraseC [c+ optcomma+] = ‛hello ⟨c⟩...⟨optcomma⟩ world’
   }
   function fill3 () {
       fill ('src', testsrc3, 'grammar', testgrammar3, 'fmt', testfmt3);
+  }
+  function fill4 () {
+      fill ('src', testsrc4, 'grammar', testgrammar4, 'fmt', testfmt4);
   }
   
   function generate () {
