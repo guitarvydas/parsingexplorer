@@ -10,7 +10,7 @@ textarea {
 
 <h1>Parsing Explorer</h1>
 
-<button onclick="generate ()">Generate Python from JSON drawing spec</button>
+<button onclick="generate ()">Generate and Run Parser</button>
 
 <br>
 <p id="status" > READY </p>
@@ -27,11 +27,11 @@ textarea {
 <textarea id="grammar" rows="9" cols="40" placeholder="grammar" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="fmt" rows="9" cols="40" placeholder="fmt" style="background-color:oldlace;">
+<textarea id="fmt" rows="9" cols="60" placeholder="fmt" style="background-color:oldlace;">
 </textarea>
 
 <p>output:</p>
-<textarea id="output" rows="17" cols="60" placeholder="output" style="background-color:oldlace;">
+<textarea id="output" rows="17" cols="60" placeholder="output">
 </textarea>
 
 <br>
@@ -43,8 +43,8 @@ textarea {
 
 
 <!-- match rewriter tools fmt -->
-    <script src="fmt-js.js"></script>
-    <script src="transpile.js"></script>
+    <script src="fmt-js/fmt-js.js"></script>
+    <script src="fmt-js/transpile.js"></script>
 
 <script>
 
@@ -59,7 +59,7 @@ main = "a"
 
   const testfmt1 = String.raw`
 Test {
-main [terminal] = ‛«terminal»’
+main [terminal] = ‛⟨terminal⟩’
 }
 `;
 /// ... example 1
@@ -77,7 +77,7 @@ Main = "b"
 
   const testfmt2 = String.raw`
 Test {
-Main [terminal] = ‛«terminal»’
+Main [terminal] = ‛⟨terminal⟩’
 }
 `;
 /// ... example 2
@@ -86,7 +86,7 @@ Main [terminal] = ‛«terminal»’
   const testsrc3 = String.raw`
 www 
 xxx
-c,cc
+c%c%c%
 `;
 
   const testgrammar3 = String.raw`
@@ -95,17 +95,19 @@ Main = PhraseW PhraseX PhraseY PhraseC
 PhraseW = "w"*
 PhraseX = "x"+
 PhraseY = "y"?
-PhraseC = ("c" ","?)+
+PhraseC = (cpattern pctpattern?)*
+cpattern = "c"
+pctpattern = "%"
 }
 `;
 
   const testfmt3 = String.raw`
 Test {
-Main [w x y c] = ‛«w»/«x»/«y»/«c»’
-PhraseW [char*] = ‛«char»’
-PhraseX [char+] = ‛«char»’
-PhraseY [char?] = ‛«char»’
-PhraseC [c+ optcomma+] = ‛hello «c»...«optcomma» world’
+Main [w x y c] = ‛⟨w⟩/⟨x⟩/⟨y⟩/⟨c⟩’
+PhraseW [char*] = ‛⟨char⟩’
+PhraseX [char+] = ‛⟨char⟩’
+PhraseY [char?] = ‛⟨char⟩’
+PhraseC [c+ optcomma+] = ‛hello ⟨c⟩...⟨optcomma⟩ world’
 }
 `;
 /// ... example 3  
