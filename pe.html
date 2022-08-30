@@ -144,11 +144,11 @@ Extra =
 
   const testfmt4 = String.raw`
 Test {
-Main [Phrase+] = ‛coming right up: ⟨Phrase⟩’
+Main [Phrase+] = ‛console.log ('coming right up: ⟨Phrase⟩');’
 Phrase_longphrase [kI kWant kA kHamburger kWith Choice*]
-  = ‛\n⟨kHamburger⟩ ⟨kWith⟩⟨Choice⟩’
+  = ‛\nkitchen.ticket ('⟨kHamburger⟩,⟨Choice⟩);’
 Phrase_shortphrase [kI kWant kA kCheeseburger]
-  = ‛\n⟨kCheeseburger⟩’
+  = ‛\nkitchen.ticket (⟨kCheeseburger⟩);’
 Choice [kAnd? x] = ‛ and⟨x⟩’  
 Condiment_mustard [kCondiment] = ‛ ⟨kCondiment⟩’
 Condiment_ketchup [kCondiment] = ‛ ⟨kCondiment⟩’
