@@ -60,7 +60,7 @@ main = "a"
 
   const testfmt1 = String.raw`
 Test {
-main [terminal] = ‛⟨terminal⟩’
+main [terminal] = ‛«terminal»’
 }
 `;
 /// ... example 1
@@ -78,7 +78,7 @@ Main = "b"
 
   const testfmt2 = String.raw`
 Test {
-Main [terminal] = ‛⟨terminal⟩’
+Main [terminal] = ‛«terminal»’
 }
 `;
 /// ... example 2
@@ -104,11 +104,11 @@ pctpattern = "%"
 
   const testfmt3 = String.raw`
 Test {
-Main [w x y c] = ‛⟨w⟩/⟨x⟩/⟨y⟩/⟨c⟩’
-PhraseW [char*] = ‛⟨char⟩’
-PhraseX [char+] = ‛⟨char⟩’
-PhraseY [char?] = ‛⟨char⟩’
-PhraseC [c+ optcomma+] = ‛hello ⟨c⟩...⟨optcomma⟩ world’
+Main [w x y c] = ‛«w»/«x»/«y»/«c»’
+PhraseW [char*] = ‛«char»’
+PhraseX [char+] = ‛«char»’
+PhraseY [char?] = ‛«char»’
+PhraseC [c+ optcomma+] = ‛hello «c»...«optcomma» world’
 }
 `;
 /// ... example 3  
@@ -144,18 +144,18 @@ Extra =
 
   const testfmt4 = String.raw`
 Test {
-Main [Phrase+] = ‛console.log ('coming right up: ⟨Phrase⟩');’
+Main [Phrase+] = ‛«Phrase»’
 Phrase_longphrase [kI kWant kA kHamburger kWith Choice*]
-  = ‛\nkitchen.ticket ('⟨kHamburger⟩,⟨Choice⟩);’
+  = ‛\nkitchen.ticket ('«kHamburger»'«Choice»);’
 Phrase_shortphrase [kI kWant kA kCheeseburger]
-  = ‛\nkitchen.ticket (⟨kCheeseburger⟩);’
-Choice [kAnd? x] = ‛ and⟨x⟩’  
-Condiment_mustard [kCondiment] = ‛ ⟨kCondiment⟩’
-Condiment_ketchup [kCondiment] = ‛ ⟨kCondiment⟩’
-Condiment_pickles [kCondiment] = ‛ ⟨kCondiment⟩’
-Condiment_specialsauce [kSpecial kSauce] = ‛ SAUCE’
-Extra_cheese [kItem] = ‛⟨kItem⟩’
-Extra_bacon [kItem] = ‛⟨kItem⟩’
+  = ‛\nkitchen.ticket ('«kCheeseburger»');’
+Choice [kAnd? x] = ‛, '«x»'’  
+Condiment_mustard [kCondiment] = ‛«kCondiment»’
+Condiment_ketchup [kCondiment] = ‛«kCondiment»’
+Condiment_pickles [kCondiment] = ‛«kCondiment»’
+Condiment_specialsauce [kSpecial kSauce] = ‛SAUCE’
+Extra_cheese [kItem] = ‛«kItem»’
+Extra_bacon [kItem] = ‛«kItem»’
 }
 `;
 /// ... example 4
@@ -165,7 +165,7 @@ Extra_bacon [kItem] = ‛⟨kItem⟩’
       src = document.getElementById(src).value;
       grammar = document.getElementById(grammar).value;
       fmt = document.getElementById(fmt).value;
-      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fmt);
+      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fmt, ohm, compilefmt);
       if (success) {
           document.getElementById('output').value = transpiled;
           document.getElementById('status').innerHTML = "OK";
