@@ -21,14 +21,14 @@ textarea {
 <button onclick="fill4 ()">fill source fields for test4</button>
 
 
-<p>src, grammar, fmt:</p>
+<p>src, grammar, fabrication:</p>
 <textarea id="src" rows="5" cols="40" placeholder="src" style="background-color:oldlace;">
 </textarea>
 
 <textarea id="grammar" rows="5" cols="40" placeholder="grammar" style="background-color:oldlace;">
 </textarea>
 
-<textarea id="fmt" rows="5" cols="60" placeholder="fmt" style="background-color:oldlace;">
+<textarea id="fabricate" rows="5" cols="60" placeholder="fabricate" style="background-color:oldlace;">
 </textarea>
 
 <p>output:</p>
@@ -43,9 +43,9 @@ textarea {
 <script src="https://unpkg.com/ohm-js@16/dist/ohm.min.js"></script>
 
 
-<!-- match rewriter tools fmt -->
-    <script src="fmt-js/fmt-js.js"></script>
-    <script src="fmt-js/transpile.js"></script>
+<!-- match rewriter tools fabricate -->
+    <script src="fabricate-js/fabricate-js.js"></script>
+    <script src="fabricate-js/transpile.js"></script>
 
 <script>
 
@@ -58,7 +58,7 @@ main = "a"
 }
 `;
 
-  const testfmt1 = String.raw`
+  const testfabricate1 = String.raw`
 Test {
 main [terminal] = ‛«terminal»’
 }
@@ -76,7 +76,7 @@ Main = "b"
 }
 `;
 
-  const testfmt2 = String.raw`
+  const testfabricate2 = String.raw`
 Test {
 Main [terminal] = ‛«terminal»’
 }
@@ -102,7 +102,7 @@ pctpattern = "%"
 }
 `;
 
-  const testfmt3 = String.raw`
+  const testfabricate3 = String.raw`
 Test {
 Main [w x y c] = ‛«w»/«x»/«y»/«c»’
 PhraseW [char*] = ‛«char»’
@@ -142,7 +142,7 @@ Extra =
 }
 `;
 
-  const testfmt4 = String.raw`
+  const testfabricate4 = String.raw`
 Test {
 Main [Phrase+] = ‛«Phrase»’
 Phrase_longphrase [kI kWant kA kHamburger kWith Choice*]
@@ -161,11 +161,11 @@ Extra_bacon [kItem] = ‛«kItem»’
 /// ... example 4
 
 
-  function test (src, grammarName, grammar, fmt) {
+  function test (src, grammarName, grammar, fabricate) {
       src = document.getElementById(src).value;
       grammar = document.getElementById(grammar).value;
-      fmt = document.getElementById(fmt).value;
-      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fmt, ohm, compilefmt);
+      fabricate = document.getElementById(fabricate).value;
+      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefabricate);
       if (success) {
           document.getElementById('output').value = transpiled;
           document.getElementById('status').innerHTML = "OK";
@@ -175,27 +175,27 @@ Extra_bacon [kItem] = ‛«kItem»’
       }
   }
 
-  function fill (srctextarea, src, grammartextarea, grammar, fmttextarea, fmt) {
+  function fill (srctextarea, src, grammartextarea, grammar, fabricatetextarea, fabricate) {
       document.getElementById(srctextarea).innerHTML = src;
       grammar = document.getElementById(grammartextarea).innerHTML = grammar;
-      fmt = document.getElementById(fmttextarea).innerHTML = fmt;
+      fabricate = document.getElementById(fabricatetextarea).innerHTML = fabricate;
   }
   
   function fill1 () {
-      fill ('src', testsrc1, 'grammar', testgrammar1, 'fmt', testfmt1);
+      fill ('src', testsrc1, 'grammar', testgrammar1, 'fabricate', testfabricate1);
   }
   function fill2 () {
-      fill ('src', testsrc2, 'grammar', testgrammar2, 'fmt', testfmt2);
+      fill ('src', testsrc2, 'grammar', testgrammar2, 'fabricate', testfabricate2);
   }
   function fill3 () {
-      fill ('src', testsrc3, 'grammar', testgrammar3, 'fmt', testfmt3);
+      fill ('src', testsrc3, 'grammar', testgrammar3, 'fabricate', testfabricate3);
   }
   function fill4 () {
-      fill ('src', testsrc4, 'grammar', testgrammar4, 'fmt', testfmt4);
+      fill ('src', testsrc4, 'grammar', testgrammar4, 'fabricate', testfabricate4);
   }
   
   function generate () {
-      test ('src', 'Test', 'grammar', 'fmt');
+      test ('src', 'Test', 'grammar', 'fabricate');
   }
   
   </script>
