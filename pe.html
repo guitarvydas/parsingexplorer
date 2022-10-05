@@ -44,8 +44,8 @@ textarea {
 
 
 <!-- match rewriter tools fabricate -->
-    <script src="fabricate-js/fabricate-js.js"></script>
-    <script src="fabricate-js/transpile.js"></script>
+    <script src="fmt-js/fmt-js.js"></script>
+    <script src="fmt-js/transpile.js"></script>
 
 <script>
 
@@ -108,7 +108,9 @@ Main [w x y c] = ‛«w»/«x»/«y»/«c»’
 PhraseW [char*] = ‛«char»’
 PhraseX [char+] = ‛«char»’
 PhraseY [char?] = ‛«char»’
-PhraseC [c+ optcomma+] = ‛hello «c»...«optcomma» world’
+PhraseC [c* optpercent*] = ‛hello «c»...«optpercent» world’
+cpattern [c] = ‛«c»’
+pctpattern [c] = ‛«c»’
 }
 `;
 /// ... example 3  
@@ -165,7 +167,7 @@ Extra_bacon [kItem] = ‛«kItem»’
       src = document.getElementById(src).value;
       grammar = document.getElementById(grammar).value;
       fabricate = document.getElementById(fabricate).value;
-      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefabricate);
+      [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefmt);
       if (success) {
           document.getElementById('output').value = transpiled;
           document.getElementById('status').innerHTML = "OK";
