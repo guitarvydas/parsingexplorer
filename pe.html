@@ -163,9 +163,11 @@ Extra_bacon [kItem] = ‛«kItem»’
 /// ... example 4
 
 
-  function test (src, grammarName, grammar, fabricate) {
+  function test (src, grammar, fabricate) {
       src = document.getElementById(src).value;
       grammar = document.getElementById(grammar).value;
+      let grammarNameArray = grammar.match (/^[^ \t]+/);
+      let grammarName = grammarNameArray [0].replace (/\n/, '');
       fabricate = document.getElementById(fabricate).value;
       [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefmt);
       if (success) {
@@ -178,9 +180,9 @@ Extra_bacon [kItem] = ‛«kItem»’
   }
 
   function fill (srctextarea, src, grammartextarea, grammar, fabricatetextarea, fabricate) {
-      document.getElementById(srctextarea).innerHTML = src;
-      grammar = document.getElementById(grammartextarea).innerHTML = grammar;
-      fabricate = document.getElementById(fabricatetextarea).innerHTML = fabricate;
+      document.getElementById(srctextarea).value = src;
+      document.getElementById(grammartextarea).value = grammar;
+      document.getElementById(fabricatetextarea).value = fabricate;
   }
   
   function fill1 () {
@@ -197,7 +199,7 @@ Extra_bacon [kItem] = ‛«kItem»’
   }
   
   function generate () {
-      test ('src', 'Test', 'grammar', 'fabricate');
+      test ('src', 'grammar', 'fabricate');
   }
   
   </script>
