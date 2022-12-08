@@ -47,6 +47,8 @@ textarea {
     <script src="fmt-js/fmt-js.js"></script>
     <script src="fmt-js/transpile.js"></script>
 
+    <script src="indenter.js"></script>
+
 <script>
 
 /// example 1  ...
@@ -171,7 +173,8 @@ Extra_bacon [kItem] = ‛«kItem»’
       fabricate = document.getElementById(fabricate).value;
       [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefmt);
       if (success) {
-          document.getElementById('output').value = transpiled;
+	  var indented = indenter (transpiled);
+          document.getElementById('output').value = indented;
           document.getElementById('status').innerHTML = "OK";
       } else {
           document.getElementById('output').value = transpiled;
