@@ -1,7 +1,7 @@
 # Parsing Explorer
 A REPL for developing tiny languages, DSLs and SCNs.
 
-![pe.png](pe.png)
+![pe.png](doc/pe.png)
 
 # Usage
 ![pescreenshot.png](doc/pescreenshot.png)
