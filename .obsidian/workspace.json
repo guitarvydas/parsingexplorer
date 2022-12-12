@@ -11,8 +11,17 @@
             "id": "21f2835b4e3f6748",
             "type": "leaf",
             "state": {
+<<<<<<< HEAD
               "type": "empty",
               "state": {}
+=======
+              "type": "markdown",
+              "state": {
+                "file": "doc/documentation.md",
+                "mode": "source",
+                "source": false
+              }
+>>>>>>> main
             }
           }
         ]
@@ -81,6 +90,10 @@
             "state": {
               "type": "backlink",
               "state": {
+<<<<<<< HEAD
+=======
+                "file": "doc/documentation.md",
+>>>>>>> main
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +110,10 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+<<<<<<< HEAD
+=======
+                "file": "doc/documentation.md",
+>>>>>>> main
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +135,13 @@
             "type": "leaf",
             "state": {
               "type": "outline",
+<<<<<<< HEAD
               "state": {}
+=======
+              "state": {
+                "file": "doc/documentation.md"
+              }
+>>>>>>> main
             }
           }
         ]
@@ -130,8 +153,13 @@
   },
   "active": "21f2835b4e3f6748",
   "lastOpenFiles": [
+<<<<<<< HEAD
     "doc/documentation.md",
     "README.md",
+=======
+    "README.md",
+    "doc/documentation.md",
+>>>>>>> main
     "doc/pescreenshot.png"
   ]
 }
