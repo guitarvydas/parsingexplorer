@@ -169,21 +169,26 @@ Extra_bacon [kItem] = ‛«kItem»’
       src = document.getElementById(src).value;
       grammar = document.getElementById(grammar).value;
       let grammarNameArray = grammar.match (/^[^ \t]+/);
-      let grammarName = grammarNameArray [0].replace (/\n/, '');
-      fabricate = document.getElementById(fabricate).value;
-      if (transpile === undefined) {
-          document.getElementById('output').value = indented;
-          document.getElementById('status').innerHTML = "FAILED - transpile() is missing (repo not loaded?)";
-      } else {
-	  [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefmt);
-	  if (success) {
-	      var indented = indenter (transpiled);
+      if (grammarNameArray) {
+          let grammarName = grammarNameArray [0].replace (/\n/, '');
+          fabricate = document.getElementById(fabricate).value;
+          if (transpile) {
+              [success, transpiled, errormessage] = transpile (src, grammarName, grammar, fabricate, ohm, compilefmt);
+              if (success) {
+                  var indented = indenter (transpiled);
+                  document.getElementById('output').value = indented;
+                  document.getElementById('status').innerHTML = "OK";
+              } else {
+                  document.getElementById('output').value = transpiled;
+                  document.getElementById('status').innerHTML = "FAILED " + errormessage;
+              }
+          } else {
               document.getElementById('output').value = indented;
-              document.getElementById('status').innerHTML = "OK";
-	  } else {
-              document.getElementById('output').value = transpiled;
-              document.getElementById('status').innerHTML = "FAILED " + errormessage;
-	  }
+              document.getElementById('status').innerHTML = "FAILED - transpile() is missing (repo not loaded?)";
+          }
+      } else {
+          document.getElementById('output').value = indented;
+          document.getElementById('status').innerHTML = "FAILED - grammar missing";
       }
   }
 
